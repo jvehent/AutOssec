@@ -1,0 +1,109 @@
+# internal_options.conf, Daniel B. Cid (dcid @ ossec.net).
+#
+# DO NOT TOUCH THIS FILE. The default configuration
+# is at ossec.conf. More information at:
+# http://www.ossec.net/en/manual.html
+#
+# This file should be handled with care. It contain
+# run time modifications that can affect the use
+# of ossec. Only change it if you know what you
+# are doing. Again, look first at ossec.conf
+# for most of the things you want to change.
+
+
+# Analysisd default rule timeframe.
+analysisd.default_timeframe=<%= node[:ossec][:internal][:analysisd][:default_timeframe] %>
+# Analysisd stats maximum diff.
+analysisd.stats_maxdiff=<%= node[:ossec][:internal][:analysisd][:stats_maxdiff] %>
+# Analysisd stats minimum diff.
+analysisd.stats_mindiff=<%= node[:ossec][:internal][:analysisd][:stats_mindiff] %>
+# Analysisd stats percentage (how much to differ from average)
+analysisd.stats_percent_diff=<%= node[:ossec][:internal][:analysisd][:stats_percent_diff] %>
+# Analysisd FTS list size.
+analysisd.fts_list_size=<%= node[:ossec][:internal][:analysisd][:fts_list_size] %>
+# Analysisd FTS minimum string size.    
+analysisd.fts_min_size_for_str=<%= node[:ossec][:internal][:analysisd][:fts_min_size_for_str] %>
+# Analysisd Enable the firewall log (at logs/firewall/firewall.log)
+# 1 to enable, 0 to disable.
+analysisd.log_fw=<%= node[:ossec][:internal][:analysisd][:log_fw] %>
+
+
+# Logcollector file loop timeout (check every 2 seconds for file changes)
+logcollector.loop_timeout=<%= node[:ossec][:internal][:logcollector][:loop_timeout] %>
+
+# Logcollector number of attempts to open a log file.
+logcollector.open_attempts=<%= node[:ossec][:internal][:logcollector][:open_attempts] %>
+
+
+# Remoted counter io flush.
+remoted.recv_counter_flush=<%= node[:ossec][:internal][:remoted][:recv_counter_flush] %>
+
+# Remoted compression averages printout.
+remoted.comp_average_printout=<%= node[:ossec][:internal][:remoted][:comp_average_printout] %>
+
+# Verify msg id (set to 0 to disable it)
+remoted.verify_msg_id=<%= node[:ossec][:internal][:remoted][:verify_msg_id] %>
+
+
+# Maild strict checking (0=disabled, 1=enabled)
+maild.strict_checking=<%= node[:ossec][:internal][:maild][:strict_checking] %>
+
+# Maild grouping (0=disabled, 1=enabled)
+# Groups alerts within the same e-mail.
+maild.groupping=<%= node[:ossec][:internal][:maild][:groupping] %>
+
+# Maild full subject (0=disabled, 1=enabled)
+maild.full_subject=<%= node[:ossec][:internal][:maild][:full_subject] %>
+
+
+# Monitord day_wait. Ammount of seconds to wait before compressing/signing
+# the files.
+monitord.day_wait=10<%= node[:ossec][:internal][:monitord][:day_wait] %>
+
+# Monitord compress. (0=do not compress, 1=compress)
+monitord.compress=<%= node[:ossec][:internal][:monitord][:compress] %>
+
+# Monitord sign. (0=do not sign, 1=sign)
+monitord.sign=<%= node[:ossec][:internal][:monitord][:sign] %>
+
+# Monitord monitor_agents. (0=do not monitor, 1=monitor)
+monitord.monitor_agents=<%= node[:ossec][:internal][:monitord][:monitor_agents] %>
+
+
+# Syscheck checking/usage speed. To avoid large cpu/memory
+# usage, you can specify how much to sleep after generating
+# the checksum of X files. The default is to sleep 2 seconds
+# after reading 15 files.
+syscheck.sleep=<%= node[:ossec][:internal][:syscheck][:sleep] %>
+syscheck.sleep_after=<%= node[:ossec][:internal][:syscheck][:sleep_after] %>
+
+
+# Database - maximum number of reconnect attempts
+dbd.reconnect_attempts=<%= node[:ossec][:internal][:dbd][:reconnect_attempts] %>
+
+
+# Debug options.
+# Debug 0 -> no debug
+# Debug 1 -> first level of debug
+# Debug 2 -> full debugging
+
+# Windows debug (used by the windows agent)
+windows.debug=<%= node[:ossec][:internal][:window][:debug] %>
+
+# Syscheck (local, server and unix agent)
+syscheck.debug=<%= node[:ossec][:internal][:syscheck][:debug] %>
+
+# Remoted (server debug)
+remoted.debug=<%= node[:ossec][:internal][:remoted][:debug] %>
+
+# Analysisd (server or local)
+analysisd.debug=<%= node[:ossec][:internal][:analysisd][:debug] %>
+
+# Log collector (server, local or unix agent)
+logcollector.debug=<%= node[:ossec][:internal][:logcollector][:debug] %>
+
+# Unix agentd
+agent.debug=<%= node[:ossec][:internal][:agent][:debug] %>
+
+
+# EOF

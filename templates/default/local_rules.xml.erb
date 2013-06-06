@@ -1,0 +1,38 @@
+<group name="local,syslog,">
+<% 
+node[:ossec][:rules].sort_by{|k,v| k.to_i}.each do |id,params|
+  headers = ""
+  if params.has_key?('head')
+    params[:head].sort.each do |key, value|
+      headers += " " + key + "=\"" + value + "\""
+    end
+  end
+-%>
+  <rule id="<%=id%>" <%=headers%>>
+<%if params.has_key?('body')
+    params[:body].sort.each do |key, value|
+      if not key.eql?('hostname_search')
+-%>
+    <<%=key%>><%=value%></<%=key%>>
+<%
+      end
+    end
+  end
+  if params.has_key?('tags')
+    params[:tags].sort.each do |tag| 
+-%>
+    <<%=tag%> />
+<%  end
+  end
+  if params.has_key?('info')
+    params[:info].sort.each do |key, value| 
+-%>
+    <info type="<%=key%>"><%=value%></info>
+<%  end
+  end 
+-%>
+  </rule>
+<%
+end
+-%>
+</group>

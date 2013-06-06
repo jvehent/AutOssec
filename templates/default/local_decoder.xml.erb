@@ -1,0 +1,30 @@
+<% node[:ossec][:decoders].sort_by{|k,v| k.to_i}.each do |id,params|
+  if not params.nil?
+-%>
+<decoder name="<%=params[:name]%>">
+<%
+    params.sort.each do |key, value|
+      unless key.eql?('name')
+        if params[key].is_a?(Hash)
+          if key.eql?('prematch') or key.eql?('regex')
+            if params[key].has_key?('offset')
+  -%>
+    <<%=key%> offset="<%=params[key][:offset]%>"><%=params[key][:parser]%></<%=key%>>
+  <%
+            else
+  -%>
+    <<%=key%>><%=params[key][:parser]%></<%=key%>>
+  <%        end
+          end
+        else
+  -%>
+    <<%=key%>><%=value%></<%=key%>>
+  <%    end
+      end
+    end
+-%>
+</decoder>
+<%
+  end
+end
+-%>

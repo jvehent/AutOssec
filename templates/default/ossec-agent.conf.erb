@@ -1,0 +1,73 @@
+<!-- OSSEC Agent configuration from chef ossec cookbook v.<%= node[:version]%> -->
+<ossec_config>
+  <client>
+    <server-ip><%=@ossec_server_ip%></server-ip>
+  </client>
+
+  <syscheck>
+    <!-- Frequency that syscheck is executed -- default every 2 hours -->
+    <frequency><%=node[:ossec][:syscheck][:frequency]%></frequency>
+
+    <!-- Directories to check  (perform all possible verifications) -->
+<%node[:ossec][:syscheck][:directories].sort_by {|k,v| k}.each do |directory,params| -%>
+    <directories check_all="yes" report_changes="<%=params[:report_changes]%>" realtime="<%=params[:realtime]%>"><%=directory%></directories>
+<%end-%>
+
+    <alert_new_files><%=node[:ossec][:syscheck][:alert_new_files]%></alert_new_files>
+    <auto_ignore><%=node[:ossec][:syscheck][:auto_ignore]%></auto_ignore>
+
+    <!-- Files/directories to ignore -->
+<%node[:ossec][:syscheck][:ignore].sort_by {|k| k}.each do |path| -%>
+    <ignore><%=path%></ignore>
+<%end-%>
+    <!-- Node specific Files/directories to ignore -->
+<%
+if not node[:ossec][:syscheck][:local_ignore].nil?
+  node[:ossec][:syscheck][:local_ignore].sort_by {|k,v| k}.each do |file,params|
+    if params[:use_here] == "true"
+      type = 'simple'
+      unless params[:type].nil?
+        if params[:type] == 'sregex'
+          type = 'sregex'
+        end
+      end
+      if type == 'sregex'
+-%>
+    <ignore type='sregex'><%=file%></ignore>
+<%    else -%>
+    <ignore><%=file%></ignore>
+<%    end
+    end
+  end
+end
+-%>
+  </syscheck>
+
+  <rootcheck>
+    <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
+    <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+  </rootcheck>
+
+  <!-- Files to monitor (localfiles) -->
+<%node[:ossec][:syslog_files].sort_by {|k| k}.each do |file| -%>
+  <localfile>
+    <log_format>syslog</log_format>
+    <location><%=file%></location>
+  </localfile>
+<%end-%>
+  <!-- Node specific files to monitor -->
+<%
+if not node[:ossec][:local_syslog_files].nil?
+  node[:ossec][:local_syslog_files].sort_by {|k,v| k}.each do |logfile,params|
+    if params[:use_here] == "true"
+-%>
+  <localfile>
+    <log_format><%=params[:log_format]%></log_format>
+    <location><%=logfile%></location>
+  </localfile>
+<%
+    end
+  end
+end
+-%>
+</ossec_config>

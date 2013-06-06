@@ -1,0 +1,9 @@
+<% if not node[:ossec][:agents].nil?
+      node[:ossec][:agents].sort.each do |ip,fields|
+      if not fields[:key].nil?
+%>
+<%= fields[:id] %> <%= fields[:name] %> <%= fields[:ip] %> <%= fields[:key]%>
+<%    end
+    end 
+  end
+-%>
