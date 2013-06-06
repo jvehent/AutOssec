@@ -121,8 +121,8 @@ This is additional to the default list ```email_to``` and is used to send alert 
 specific recipients for a limited number of hosts only.
 
 # Local Rules Definitions
-Rules are defined in JSON format and replicate the XML format of regular [OSSEC Rules
-Syntax](http://www.ossec.net/doc/syntax/head_rules.html)
+Rules are defined in Ruby Hash format and replicate the XML format of regular
+[OSSEC Rules Syntax](http://www.ossec.net/doc/syntax/head_rules.html)
 Each rule has a head, a body, tags and info (the last 2 being optional)
 
     head=   <rule id="12345" level="12" frequency="45" timeframe="60">
@@ -138,6 +138,7 @@ The section below are parsed by the template. The following items are mandatory:
  * head/level
  * body/description
 
+```
     :ossec =>
       :rules => {
         "100001" => {
@@ -186,8 +187,10 @@ The section below are parsed by the template. The following items are mandatory:
           }
         }
       }
+```
 
 ## hostname_search
+
 To the exception of __hostname_search__, all attributes use the same syntax as the
 ossec rule in XML format does.
 __hostname_search__ in this cookbook represents a search query that is executed by
@@ -239,6 +242,10 @@ always have a ```parser``` value. See the ossec documentation for more informati
 
 Usage
 =====
-recipe[ossec-server] should be a stand alone installation
-recipe[ossec-agent] should be added (via role[ossec-agent]) to all the nodes of the
+* `recipe[ossec-server]` should be a stand alone installation
+* `recipe[ossec-agent]` should be added (via role[ossec-agent]) to all the nodes of the
 environment
+
+Author
+======
+Julien Vehent - julien@linuxwall.info - http://jve.linuxwall.info
