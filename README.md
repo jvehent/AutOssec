@@ -14,7 +14,7 @@ Attributes
 # General Attributes
 
 The attributes below follow the same namespace syntax that OSSEC does. Refer to
-the officiel [OSSEC Documentation](http://www.ossec.net/doc/syntax/ossec_config.html)
+the official [OSSEC Documentation](http://www.ossec.net/doc/syntax/ossec_config.html)
 for more information.
 
 Default attributes from the cookbook:
