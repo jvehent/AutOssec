@@ -9,6 +9,8 @@ default[:ossec][:email_maxperhour] = "9999"
 default[:ossec][:memory_size] = "100000"
 default[:ossec][:remote][:connection] = "secure"
 default[:ossec][:agents] = {}
+default[:ossec][:rules] = {}
+default[:ossec][:email_alerts] = {}
 default[:ossec][:agent][:enable] = true
 
 
