@@ -56,7 +56,7 @@ end
 
 service "ossec-agent" do
   provider Chef::Provider::Service::Init
-  service_name "ossec-hids-client"
+  service_name node[:ossec][:client][:server_name]
   supports :start => true, :stop => true, :restart => true, :status => true
   action [ :start ]
   only_if "test -e /var/ossec/etc/ossec.conf && test -e /var/ossec/etc/client.keys"
