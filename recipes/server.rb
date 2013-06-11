@@ -13,7 +13,7 @@ package "ossec-hids-server"
 
 service "ossec-server" do
   provider Chef::Provider::Service::Init
-  service_name node[:ossec][:server][:server_name]
+  service_name node[:ossec][:server][:service_name]
   supports :start => true, :stop => true, :restart => true, :status => true
   action [ :start ]
   only_if "test -e /var/ossec/etc/ossec.conf"
