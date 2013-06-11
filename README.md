@@ -464,7 +464,7 @@ run_list(
 )
 default_attributes(
   :ossec => {
-    :server => {
+    :client => {
       :server_name => 'ossec-hids-client'
     },
     :syscheck => {
