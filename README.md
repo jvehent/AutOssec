@@ -56,7 +56,7 @@ Default attributes from the ossec-server role:
         }
       },
       :server => {
-        :server_name => 'ossec-hids-server'
+        :service_name => 'ossec-hids-server'
       },
       :syscheck => {
         :frequency => '7200',
@@ -465,7 +465,7 @@ run_list(
 default_attributes(
   :ossec => {
     :client => {
-      :server_name => 'ossec-hids-client'
+      :service_name => 'ossec-hids-client'
     },
     :syscheck => {
       :frequency => '7200',
